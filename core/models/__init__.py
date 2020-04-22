@@ -1,3 +1,4 @@
 from django.db import models
+from core.models.entry import Entry
 
-# Create your models here.
+__all__ = [Entry.__name__]

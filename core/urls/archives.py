@@ -1,8 +1,8 @@
 from django.conf.urls import url
 
-from heldler.core.views.archives import EntryIndex
+from core.views.archives import EntryIndex
 
-index_patterns = [
+urlpatterns = [
     url(r'^$',
         EntryIndex.as_view(),
         name='entry_index_archive'),
