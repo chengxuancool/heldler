@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from core.managers import EntryPublishedManager
 
 
 class BaseEntry(models.Model):
@@ -20,3 +22,31 @@ class BaseEntry(models.Model):
         'status', db_index=True,
         choices=STATUS_CHOICES, default=0
     )
+
+    publication_date = models.DateTimeField(
+        'publication date',
+        db_index=True, default=timezone.now,
+        help_text="Used to build the entry's URL.")
+
+    new_object = models.Manager()
+    # published  = EntryPublishedManager()
+
+    class Meta:
+        """
+        base entry meta info
+        """
+        abstract = True
+        ordering = ['-publication_date']
+
+
+class AbstractEntry(BaseEntry):
+    """
+    abstract entry model class assembling
+    all the abstract entry model in this class
+
+    In this manner we can override some fields without
+    reimplement all the Abstract Entries.
+    """
+
+    class Meta(BaseEntry.Meta):
+        abstract = True

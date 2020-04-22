@@ -9,7 +9,7 @@ def load_model_class(model_path):
     class_name = model_path[mod + 1:]
 
     try:
-        _class = getattr(import_module(module_name), class_name)
+        _class = getattr(import_module(module_name), class_name, '')
         return _class
     except (ImportError, AttributeError):
         raise ImproperlyConfigured('%s cannot be imported' % model_path)
