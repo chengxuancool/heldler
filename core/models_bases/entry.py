@@ -28,8 +28,8 @@ class BaseEntry(models.Model):
         db_index=True, default=timezone.now,
         help_text="Used to build the entry's URL.")
 
-    new_object = models.Manager()
-    # published  = EntryPublishedManager()
+    object = models.Manager()
+    published  = EntryPublishedManager()
 
     class Meta:
         """
@@ -37,6 +37,7 @@ class BaseEntry(models.Model):
         """
         abstract = True
         ordering = ['-publication_date']
+        get_latest_by = 'publication_date'
 
 
 class AbstractEntry(BaseEntry):

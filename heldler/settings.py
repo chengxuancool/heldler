@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'core',
 ]
 
@@ -129,3 +130,5 @@ STATIC_URL = '/static/'
 
 # setting SITE ID
 SITE_ID = 1
+
+USE_TZ = False

@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone
-# from django.contrib.sites.models import Site
+from django.contrib.sites.models import Site
 
 DRAFT = 0
 HIDDEN = 1
@@ -19,6 +19,15 @@ PUBLISHED = 2
 #     return query_set
 
 
+def entries_published(queryset):
+    now = timezone.now()
+    query_set = queryset.filter(
+        models.Q(publication_date__lte=now)
+    )
+
+    return query_set
+
+
 class EntryPublishedManager(models.Manager):
     def get_queryset(self):
-        return super(EntryPublishedManager, self).get_queryset().filter()
+        return entries_published(super(EntryPublishedManager, self).get_queryset())
